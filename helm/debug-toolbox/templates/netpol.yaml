@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+  labels:
+    app: {{ template "debug-toolbox.fullname" . }}
+spec:
+  egress:
+    - {}
+  ingress:
+    - {}
+  podSelector:
+    matchLabels:
+      app: {{ template "debug-toolbox.fullname" . }}
+  policyTypes:
+    - Ingress
+    - Egress

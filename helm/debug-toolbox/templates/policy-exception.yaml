@@ -1,0 +1,56 @@
+{{- if .Values.global.podSecurityStandards.enforced }}
+apiVersion: kyverno.io/v2beta1
+kind: PolicyException
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ template "debug-toolbox.fullname" . }}
+  annotations:
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "giantswarm.io/exception-reason": "The debug-toolbox app may need access to network interfaces or kernel settings, access to host filesystem, needs to run privileged commands and use temporal volumes."
+spec:
+  exceptions:
+    - policyName: disallow-capabilities-strict
+      ruleNames:
+        - autogen-require-drop-all
+        - require-drop-all
+    - policyName: disallow-host-namespaces
+      ruleNames:
+        - autogen-host-namespaces
+        - host-namespaces
+    - policyName: disallow-host-path
+      ruleNames:
+        - autogen-host-path
+        - host-path
+    - policyName: disallow-privilege-escalation
+      ruleNames:
+        - autogen-privilege-escalation
+        - privilege-escalation
+    - policyName: require-run-as-non-root-user
+      ruleNames:
+        - autogen-run-as-non-root-user
+        - run-as-non-root-user
+    - policyName: require-run-as-nonroot
+      ruleNames:
+        - autogen-run-as-non-root
+        - run-as-non-root
+    - policyName: restrict-seccomp-strict
+      ruleNames:
+        - autogen-check-seccomp-strict
+        - check-seccomp-strict
+    - policyName: restrict-volume-types
+      ruleNames:
+        - autogen-restricted-volumes
+        - restricted-volumes
+  match:
+    any:
+      - resources:
+          kinds:
+            - Deployment
+            - Pod
+          names:
+          - {{ template "debug-toolbox.fullname" . }}*
+          namespaces:
+          - {{ $.Release.Namespace }}
+{{- end -}}

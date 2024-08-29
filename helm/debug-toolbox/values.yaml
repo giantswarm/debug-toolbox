@@ -1,0 +1,44 @@
+global:
+  podSecurityStandards:
+    enforced: true
+
+affinity: {}
+
+extraHostPaths: []
+
+hostNetwork: true
+hostPID: false
+hostIPC: false
+
+image:
+  registry: gsoci.azurecr.io
+  debugContainerImage:
+    name: giantswarm/debug-toolbox
+    tag: 1.0.0
+  pauseContainerImage:
+    name: giantswarm/pause-amd64
+    tag: 3.3
+
+kyvernoPolicyExceptions:
+  enabled: true
+
+masterOnly: false
+
+nodeSelector: {}
+
+# Make room to run the pod
+priorityClassName: system-node-critical
+
+rbac:
+  rules:
+  - apiGroup:
+    - ""
+    resource:
+    - nodes
+    verbs:
+    - update
+    - patch
+    - get
+    - list
+
+tolerations: []
