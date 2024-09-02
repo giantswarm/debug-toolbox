@@ -11,4 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the debug toolbox app.
 
-[Unreleased]: https://github.com/giantswarm/k8s-initiator-app/compare/HEAD...HEAD
+[Unreleased]: https://github.com/giantswarm/k8s-initiator-app/compare/v0.0.1...HEAD
