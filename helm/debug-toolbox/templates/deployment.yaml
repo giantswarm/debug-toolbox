@@ -4,6 +4,7 @@ metadata:
   name: {{ template "debug-toolbox.fullname" . }}
   labels:
     app: {{ template "debug-toolbox.fullname" . }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
