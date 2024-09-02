@@ -5,6 +5,9 @@ metadata:
   labels:
     app: {{ template "debug-toolbox.fullname" . }}
     {{- include "labels.common" . | nindent 4 }}
+  annotations:
+    ignore-check.kube-linter.io/no-read-only-root-fs: "The toolbox need write into volumes"
+    ignore-check.kube-linter.io/run-as-non-root: "The toolbox needs to run as privileged because debugging purpose"
 spec:
   replicas: 1
   selector:
@@ -41,6 +44,8 @@ spec:
           mountPath: /manifests
         - name: policies-volume
           mountPath: /policies
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
 {{- include "debug-toolbox.extraVolumeMounts" . | indent 8 }}
       volumes:
       - name: manifests-volume
