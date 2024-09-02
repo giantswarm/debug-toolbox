@@ -6,7 +6,7 @@ affinity: {}
 
 extraHostPaths: []
 
-hostNetwork: true
+hostNetwork: false
 hostPID: false
 hostIPC: false
 
