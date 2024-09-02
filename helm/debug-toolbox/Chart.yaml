@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: "v1.0.0"
+home: https://github.com/giantswarm/debug-toolbox
+description: The debug toolbox is a collection of tools that can be used to debug issues in a Kubernetes cluster.
+icon: https://s.giantswarm.io/app-icons/1/png/debug-toolbox-app-light.png
+name: debug-toolbox
+sources:
+- https://github.com/giantswarm/debug-toolbox
+- https://raw.githubusercontent.com/giantswarm/debug-toolbox/v1.0.0/README.md
+annotations:
+  application.giantswarm.io/team: team-horizon
+version: "v1.0.0"

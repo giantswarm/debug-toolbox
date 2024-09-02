@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ template "debug-toolbox.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ template "debug-toolbox.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+rules:
+{{- range $rule := .Values.rbac.rules }}
+- apiGroups:
+  {{- if $rule.apiGroup  }}
+  {{- range $a := $rule.apiGroup }}
+  - {{ $a | quote }}
+  {{- end }}
+  {{- else }}
+  - ""
+  {{- end }}
+  resources:
+  {{- range $r := $rule.resource }}
+  - {{ $r }}
+  {{- end }}
+  verbs:
+  {{- range $verb := $rule.verbs }}
+  - {{ $verb }}
+  {{- end }}
+{{- end }}

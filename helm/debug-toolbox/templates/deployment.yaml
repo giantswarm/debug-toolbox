@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+  labels:
+    app: {{ template "debug-toolbox.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "debug-toolbox.fullname" . }}
+  template:
+    metadata:
+      name: {{ template "debug-toolbox.fullname" . }}
+      labels:
+        app: {{ template "debug-toolbox.fullname" . }}
+      annotations:
+        releasetime: {{ now | quote }}
+    spec:
+      hostNetwork: {{ .Values.hostNetwork }}
+      hostIPC: {{ .Values.hostIPC }}
+      hostPID: {{ .Values.hostPID }}
+      priorityClassName: {{ .Values.priorityClassName }}
+{{ include "debug-toolbox.nodeSelector" . | indent 6 }}
+{{ include "debug-toolbox.affinity" . | indent 6 }}
+{{ include "debug-toolbox.tolerations" . | indent 6 }}
+      serviceAccountName: {{ template "debug-toolbox.fullname" . }}
+      containers:
+      - name: debug-toolbox
+        image: {{ .Values.image.registry }}/{{ .Values.image.debugContainerImage.name }}:{{ .Values.image.debugContainerImage.tag }}
+        command:
+        - /bin/sh
+        - -c
+        - while true; do echo "I am ready" && sleep 30; done;
+        securityContext:
+          runAsUser: 0
+          runAsGroup: 0
+        volumeMounts:
+        - name: manifests-volume
+          mountPath: /manifests
+        - name: policies-volume
+          mountPath: /policies
+{{- include "debug-toolbox.extraVolumeMounts" . | indent 8 }}
+      volumes:
+      - name: manifests-volume
+        hostPath:
+          path: /etc/kubernetes/manifests
+      - name: policies-volume
+        hostPath:
+          path: /etc/kubernetes/policies
+{{- include "debug-toolbox.extraVolumes" . | indent 6 }}
