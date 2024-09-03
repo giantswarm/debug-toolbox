@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2024-09-02
+## [1.0.0] - 2024-09-03
 
 ### Added
 
 - First version of the debug toolbox app.
 
 [Unreleased]: https://github.com/giantswarm/debug-toolbox/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/giantswarm/debug-toolbox/compare/v0.0.1...v1.0.0
+[1.0.0]: https://github.com/giantswarm/debug-toolbox/compare/v1.0.0...v1.0.0
