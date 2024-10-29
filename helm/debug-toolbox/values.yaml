@@ -2,6 +2,15 @@ global:
   podSecurityStandards:
     enforced: true
 
+    # Add extra rules to the PolicyException
+    # Example:
+    # extraRules:
+    #   - policyName: my-extra-rule
+    #     ruleNames:
+    #       - my-extra-rule-1
+    #       - my-extra-rule-2
+    extraRules: []
+
 affinity: {}
 
 extraHostPaths: []

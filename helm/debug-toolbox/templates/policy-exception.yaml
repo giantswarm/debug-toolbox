@@ -43,6 +43,13 @@ spec:
       ruleNames:
         - autogen-restricted-volumes
         - restricted-volumes
+    {{- range .Values.global.podSecurityStandards.extraRules }}
+    - policyName: {{ .policyName }}
+      ruleNames:
+      {{- range .ruleNames }}
+        - {{ . }}
+      {{- end }}
+    {{- end }}
   match:
     any:
       - resources:
