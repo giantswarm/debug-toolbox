@@ -8,6 +8,8 @@ metadata:
   annotations:
     ignore-check.kube-linter.io/no-read-only-root-fs: "The toolbox need write into volumes"
     ignore-check.kube-linter.io/run-as-non-root: "The toolbox needs to run as privileged because debugging purpose"
+    ignore-check.kube-linter.io/drop-net-raw-capability: "Required for network debugging."
+    ignore-check.kube-linter.io/privilege-escalation-container: "Privilege escalation needed for debugging."
 spec:
   replicas: 1
   selector:
