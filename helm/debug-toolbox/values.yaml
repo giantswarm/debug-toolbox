@@ -2,6 +2,15 @@ global:
   podSecurityStandards:
     enforced: true
 
+    # Add extra rules to the PolicyException
+    # Example:
+    # extraRules:
+    #   - policyName: my-extra-rule
+    #     ruleNames:
+    #       - my-extra-rule-1
+    #       - my-extra-rule-2
+    extraRules: []
+
 affinity: {}
 
 extraHostPaths: []
@@ -48,5 +57,12 @@ resources:
   requests:
     cpu: 100m
     memory: 100Mi
+
+securityContext:
+  runAsUser: 0
+  runAsGroup: 0
+  allowPrivilegeEscalation: true
+  capabilities:
+    add: ["NET_ADMIN", "SYS_TIME", "NET_RAW"]  # Add necessary capabilities
 
 tolerations: []
