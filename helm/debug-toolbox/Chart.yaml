@@ -9,4 +9,4 @@ sources:
   - https://raw.githubusercontent.com/giantswarm/debug-toolbox/v1.0.0/README.md
 annotations:
   application.giantswarm.io/team: team-horizon
-version: "1.0.0"
+version: "1.1.0"
