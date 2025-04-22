@@ -47,13 +47,8 @@
                 }
             }
         },
-        "kyvernoPolicyExceptions": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
+        "policyExceptionNamespace": {
+            "type": "string"
         },
         "masterOnly": {
             "type": "boolean"
