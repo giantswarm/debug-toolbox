@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Set a fix namespace for the policy exception.
+
 ## [1.1.1] - 2025-01-17
 
 ## [1.1.0] - 2024-10-31
 
-- Allow extend policy exceptions
+- Allow extend policy exceptions.
 
 ## [1.0.0] - 2024-09-03
 
