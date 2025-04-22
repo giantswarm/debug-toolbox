@@ -48,7 +48,7 @@
             }
         },
         "policyExceptionNamespace": {
-            "type": "string",
+            "type": "string"
         },
         "masterOnly": {
             "type": "boolean"
