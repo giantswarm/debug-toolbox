@@ -5,8 +5,8 @@ description: The debug toolbox is a collection of tools that can be used to debu
 icon: https://s.giantswarm.io/app-icons/1/png/k8s-initiator-app-light.png
 name: debug-toolbox
 sources:
-- https://github.com/giantswarm/debug-toolbox
-- https://raw.githubusercontent.com/giantswarm/debug-toolbox/v1.0.0/README.md
+  - https://github.com/giantswarm/debug-toolbox
+  - https://raw.githubusercontent.com/giantswarm/debug-toolbox/v1.0.0/README.md
 annotations:
-  application.giantswarm.io/team: team-horizon
-version: "v1.0.0"
+  application.giantswarm.io/team: team-planeteers
+version: "1.1.1"
