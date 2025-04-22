@@ -3,7 +3,7 @@ apiVersion: kyverno.io/v2beta1
 kind: PolicyException
 metadata:
   name: {{ template "debug-toolbox.fullname" . }}
-  namespace: {{ $.Release.Namespace }}
+  namespace: policy-exceptions
   labels:
     app: {{ template "debug-toolbox.fullname" . }}
   annotations:
