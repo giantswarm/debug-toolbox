@@ -10,10 +10,10 @@ Running the kubectl gs template with the following command:
 export ORG=your-org
 export NAMESPACE=your-namespace
 export CLUSTER=your-cluster
-kubectl gs template app --catalog giantswarm --name debug-toolbox --namespace org-$ORG --target-namespace $NAMESPACE --version 1.0.0 --cluster-name $CLUSTER
+kubectl gs template app --catalog giantswarm --name debug-toolbox --organization $ORG --target-namespace $NAMESPACE --version 1.0.0 --cluster-name $CLUSTER
 ```
 
-It will create a `App` resource in the management cluster.
+It will create an `App` resource in the management cluster.
 
 When you want to run with especial PSS support, you can run the following command:
 
@@ -22,7 +22,7 @@ export ORG=your-org
 export NAMESPACE=your-namespace
 export CLUSTER=your-cluster
 kubectl gs template app --catalog giantswarm --name debug-toolbox \
-  --namespace org-$ORG --target-namespace $NAMESPACE \
+  --organization $ORG --target-namespace $NAMESPACE \
   --version 1.0.0 --cluster-name $CLUSTER \
   --user-configmap=helm/debug-toolbox/values_pss_example.yaml
 ```
