@@ -15,7 +15,7 @@ kubectl gs template app --catalog giantswarm --name debug-toolbox --organization
 
 It will create an `App` resource in the management cluster.
 
-When you want to run with especial PSS support, you can run the following command:
+When you want to run with special PSS support, you can run the following command:
 
 ```sh
 export ORG=your-org
