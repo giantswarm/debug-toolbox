@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.0] - 2025-09-18
 
+### Changed
+
+- Update the Kyverno policy exception to `kyverno.io/v2`
 - Set a fix namespace for the policy exception.
 
 ## [1.1.1] - 2025-01-17
