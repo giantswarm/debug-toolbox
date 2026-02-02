@@ -8,5 +8,6 @@ sources:
   - https://github.com/giantswarm/debug-toolbox
   - https://raw.githubusercontent.com/giantswarm/debug-toolbox/v1.0.0/README.md
 annotations:
-  application.giantswarm.io/team: team-planeteers
+  io.giantswarm.application.audience: all
+  io.giantswarm.application.team: planeteers
 version: "1.2.0"

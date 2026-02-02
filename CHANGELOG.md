@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated the Chart metadata to include new audience label for OCI repositories.
+
 ## [1.2.0] - 2025-09-18
 
 ### Changed
