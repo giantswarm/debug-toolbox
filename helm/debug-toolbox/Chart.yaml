@@ -10,4 +10,4 @@ sources:
 annotations:
   io.giantswarm.application.audience: all
   io.giantswarm.application.team: planeteers
-version: "1.2.0"
+version: "1.2.1"
