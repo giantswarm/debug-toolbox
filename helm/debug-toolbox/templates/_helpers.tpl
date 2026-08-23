@@ -67,5 +67,3 @@ affinity:
   mountPath: {{ .mountPath }}
 {{- end }}
 {{- end -}}
-
-
