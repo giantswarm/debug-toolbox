@@ -1,12 +1,32 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
+    "additionalProperties": false,
     "properties": {
         "affinity": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
         },
         "extraHostPaths": {
             "type": "array"
+        },
+        "global": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "podSecurityStandards": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "enforced": {
+                            "type": "boolean"
+                        },
+                        "extraRules": {
+                            "type": "array"
+                        }
+                    }
+                }
+            }
         },
         "hostIPC": {
             "type": "boolean"
@@ -19,9 +39,11 @@
         },
         "image": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "debugContainerImage": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "name": {
                             "type": "string"
@@ -33,6 +55,7 @@
                 },
                 "pauseContainerImage": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "name": {
                             "type": "string"
@@ -47,25 +70,28 @@
                 }
             }
         },
-        "policyExceptionNamespace": {
-            "type": "string"
-        },
         "masterOnly": {
             "type": "boolean"
         },
         "nodeSelector": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
+        },
+        "policyExceptionNamespace": {
+            "type": "string"
         },
         "priorityClassName": {
             "type": "string"
         },
         "rbac": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "rules": {
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "additionalProperties": false,
                         "properties": {
                             "apiGroup": {
                                 "type": "array",
@@ -87,6 +113,63 @@
                             }
                         }
                     }
+                }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "limits": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "cpu": {
+                            "type": "string"
+                        },
+                        "memory": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "requests": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "cpu": {
+                            "type": "string"
+                        },
+                        "memory": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "securityContext": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "allowPrivilegeEscalation": {
+                    "type": "boolean"
+                },
+                "capabilities": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "add": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "runAsGroup": {
+                    "type": "integer"
+                },
+                "runAsUser": {
+                    "type": "integer"
                 }
             }
         },
