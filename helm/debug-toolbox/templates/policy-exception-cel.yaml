@@ -1,0 +1,65 @@
+{{- if and .Values.global.podSecurityStandards.enforced .Values.kyvernoPolicyExceptions.enabled }}
+{{- /* The policies of the legacy exception, then those of extraRules; uniq drops the repeated ones. */}}
+{{- $policies := list "disallow-capabilities-strict" "disallow-host-namespaces" "disallow-host-path" "disallow-privilege-escalation" "require-run-as-non-root-user" "require-run-as-nonroot" "restrict-seccomp-strict" "restrict-volume-types" }}
+{{- range .Values.global.podSecurityStandards.extraRules }}
+{{- $policies = append $policies .policyName }}
+{{- end }}
+apiVersion: policies.kyverno.io/v1
+kind: PolicyException
+metadata:
+  name: {{ template "debug-toolbox.fullname" . }}
+  namespace: {{ .Values.policyExceptionNamespace }}
+  labels:
+    app: {{ template "debug-toolbox.fullname" . }}
+  annotations:
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "giantswarm.io/exception-reason": "The debug-toolbox app may need access to network interfaces or kernel settings, access to host filesystem, needs to run privileged commands and use temporal volumes."
+spec:
+  policyRefs:
+  {{- range uniq $policies }}
+  - name: {{ . }}
+    kind: ValidatingPolicy
+  {{- end }}
+  {{- if not (has "disallow-capabilities" $policies) }}
+  # disallow-capabilities is missing from the legacy exception. It is excepted
+  # because the debug-toolbox Deployment fails it (it adds NET_ADMIN and
+  # SYS_TIME).
+  - name: disallow-capabilities
+    kind: ValidatingPolicy
+  {{- end }}
+  {{- if not (has "require-non-root-groups" $policies) }}
+  # require-non-root-groups is missing from the legacy exception. It is excepted
+  # because the debug-toolbox Deployment fails it (it runs as group 0).
+  - name: require-non-root-groups
+    kind: ValidatingPolicy
+  {{- end }}
+  {{- if not (has "require-pod-probes" $policies) }}
+  # require-pod-probes is a supplemental policy and usually not enabled. It is
+  # excepted because the debug-toolbox Deployment fails it when the policy is
+  # enforced.
+  - name: require-pod-probes
+    kind: ValidatingPolicy
+  {{- end }}
+  {{- if not (has "require-ro-rootfs" $policies) }}
+  # require-ro-rootfs is a supplemental policy and usually not enabled. It is
+  # excepted because the debug-toolbox Deployment fails it when the policy is
+  # enforced.
+  - name: require-ro-rootfs
+    kind: ValidatingPolicy
+  {{- end }}
+  {{- if not (has "restrict-sa-automount-sa-token" $policies) }}
+  # restrict-sa-automount-sa-token is a supplemental policy and usually not
+  # enabled. It is excepted because the debug-toolbox ServiceAccount fails it
+  # when the policy is enforced.
+  - name: restrict-sa-automount-sa-token
+    kind: ValidatingPolicy
+  {{- end }}
+  matchConditions:
+  - name: debug-toolbox-workloads
+    # ServiceAccount is matched for restrict-sa-automount-sa-token.
+    expression: >-
+      request.kind.kind in ['Deployment', 'Pod', 'ServiceAccount'] &&
+      request.namespace == '{{ $.Release.Namespace }}' &&
+      has(object.metadata.name) &&
+      object.metadata.name.startsWith('{{ template "debug-toolbox.fullname" . }}')
+{{- end -}}

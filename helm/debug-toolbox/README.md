@@ -25,7 +25,9 @@ The debug toolbox is a collection of tools that can be used to debug issues in a
 | image.debugContainerImage.tag | string | `"1.0.0"` |  |
 | image.pauseContainerImage.name | string | `"giantswarm/pause-amd64"` |  |
 | image.pauseContainerImage.tag | float | `3.3` |  |
-| policyExceptionNamespace | string | `"policy-exceptions"` |  |
+| kyvernoPolicyExceptions.enabled | bool | `true` |  |
+| kyvernoPolicyExceptions.legacy.enabled | bool | `true` | Renders the kyverno.io/v2 PolicyException, which applies to ClusterPolicies only. Will be used as a global switch in a future release. |
+| policyExceptionNamespace | string | `"giantswarm"` |  |
 | masterOnly | bool | `false` |  |
 | nodeSelector | object | `{}` |  |
 | priorityClassName | string | `"system-node-critical"` |  |
