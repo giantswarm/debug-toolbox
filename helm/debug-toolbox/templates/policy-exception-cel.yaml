@@ -61,5 +61,5 @@ spec:
       request.kind.kind in ['Deployment', 'Pod', 'ServiceAccount'] &&
       request.namespace == '{{ $.Release.Namespace }}' &&
       has(object.metadata.name) &&
-      object.metadata.name.startsWith('{{ template "debug-toolbox.fullname" . }}')
+      (object.metadata.name == '{{ template "debug-toolbox.fullname" . }}' || object.metadata.name.startsWith('{{ template "debug-toolbox.fullname" . }}-'))
 {{- end -}}
