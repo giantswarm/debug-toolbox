@@ -27,7 +27,7 @@ The debug toolbox is a collection of tools that can be used to debug issues in a
 | image.pauseContainerImage.tag | float | `3.3` |  |
 | kyvernoPolicyExceptions.enabled | bool | `true` |  |
 | kyvernoPolicyExceptions.legacy.enabled | bool | `true` | Renders the kyverno.io/v2 PolicyException, which applies to ClusterPolicies only. Will be used as a global switch in a future release. |
-| policyExceptionNamespace | string | `"giantswarm"` |  |
+| policyExceptionNamespace | string | `"kube-system"` |  |
 | masterOnly | bool | `false` |  |
 | nodeSelector | object | `{}` |  |
 | priorityClassName | string | `"system-node-critical"` |  |
