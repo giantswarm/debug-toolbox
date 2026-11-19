@@ -1,4 +1,4 @@
-{{- if .Values.global.podSecurityStandards.enforced }}
+{{- if and .Values.global.podSecurityStandards.enforced .Values.kyvernoPolicyExceptions.enabled .Values.kyvernoPolicyExceptions.legacy.enabled }}
 apiVersion: kyverno.io/v2
 kind: PolicyException
 metadata:
@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.policyExceptionNamespace }}
   labels:
     app: {{ template "debug-toolbox.fullname" . }}
+    policy.giantswarm.io/migrated-to-cel: "true"
   annotations:
     "helm.sh/hook": "pre-install,pre-upgrade"
     "giantswarm.io/exception-reason": "The debug-toolbox app may need access to network interfaces or kernel settings, access to host filesystem, needs to run privileged commands and use temporal volumes."
